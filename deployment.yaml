@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-microapp-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: weather-microapp-pod
+  template:
+    metadata:
+      labels:
+        app: weather-microapp-pod
+    spec:
+      containers:
+      - name: weather-microapp-container
+        image: weathermicroservice.azurecr.io/counter-image:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
